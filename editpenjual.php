@@ -34,33 +34,46 @@ while($user_data = mysqli_fetch_array($penjual))
 };
 ?>
 <html>
-<head>	
+
+<head>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <title>Edit User Data Penjual</title>
 </head>
- 
+
 <body>
-    <a href="penjual.php">Home</a>
-    <br/><br/>
-    
-    <form name="update_user" method="post" action="editpenjual.php">
-        <table border="0">
-        <tr> 
-                <td>Nama Penjual</td>
-                <td><input type="text" name="nama_penjual" value=<?php echo $nama_penjual?>></td>
-            </tr>
-            <tr> 
-                <td>Nomotr Hp</td>
-                <td><input type="number" name="no_hp" value=<?php echo $nohp;?>></td>
-            </tr>
-            <tr> 
-                <td>alamat</td>
-                <td><input type="text" name="alamat" value=<?php echo $alamat;?>></td>
-            </tr>
-            <tr>
-                <td><input type="hidden" name="id" value=<?php echo $_GET['id'];?>></td>
-                <td><input type="submit" name="update" value="Update"></td>
-            </tr>
-        </table>
-    </form>
+    <a href="penjual.php" class="btn btn-dark mt-4 mx-4">kembali ke data penjual</a>
+
+    <div class="container border">
+        <div class="card-header text-center bg-primary text-white">Edit data penjual</div>
+
+        <form name="update_user" method="post" action="editpenjual.php">
+            <div class="mb-3 w-auto">
+                <label class="form-label">Nama Penjual</label>
+                <input type="text" class="form-control" name="nama_penjual" value=<?php echo $nama_penjual?>>
+            </div>
+            <div class="mb-3 w-auto">
+                <label class="form-label">Nomor Hp</label>
+                <input type="number" class="form-control" name="no_hp" value=<?php echo $nohp?>>
+            </div>
+            <div class="mb-3 w-auto">
+                <label class="form-label">alamat</label>
+                <input type="text" class="form-control" name="alamat" value=<?php echo $alamat?>>
+            </div>
+            <div>
+                <input type="hidden" name="id" value=<?php echo $_GET['id'];?>>
+                <input type="submit" name="update" value="Update" class="btn btn-primary">
+            </div>
+
+
+
+
+
+
+        </form>
+    </div>
 </body>
+
 </html>

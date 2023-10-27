@@ -8,7 +8,8 @@ $penjual = mysqli_query($mysqli, "SELECT * FROM penjual ORDER BY id DESC");
 
 <html>
 <!-- boostrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 <head>
     <title>penjual</title>
@@ -16,7 +17,7 @@ $penjual = mysqli_query($mysqli, "SELECT * FROM penjual ORDER BY id DESC");
 
 <body>
     <div class="conatiner-fluid m-4">
-        <a href="index.php" class="btn btn-primary mb-3">kembali ke menu Makanan</a>
+        <a href="index.php" class="btn btn-dark mb-3">kembali ke menu Makanan</a>
         <table class="table">
             <thead class="table-primary">
                 <tr>
@@ -37,7 +38,7 @@ $penjual = mysqli_query($mysqli, "SELECT * FROM penjual ORDER BY id DESC");
             }
             ?>
         </table>
-        <a href="add.php" class="btn btn-primary">kembali ke add menu</a>
+        <a href="addpenjual.php" class="btn btn-primary">Tambah Data Penjual</a>
     </div>
 </body>
 

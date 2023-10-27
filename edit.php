@@ -5,7 +5,7 @@ include_once("config.php");
 // Check if form is submitted for user update, then redirect to homepage after update
 if (isset($_POST['update'])) {
     $id = $_POST['id'];
-
+    
     $nama_makanan = $_POST['nama_makanan'];
     $jenis = $_POST['jenis'];
     $harga = $_POST['harga'];
@@ -23,13 +23,15 @@ if (isset($_POST['update'])) {
 // Display selected user data based on id
 // Getting id from url
 $id = $_GET['id'];
+$id_p = $_GET['id_penjual'];
+
 
 
 // Fetech user data based on id
 $menu = mysqli_query($mysqli, "SELECT * FROM menu WHERE id=$id");
 
 while ($user_data = mysqli_fetch_array($menu)) {
-
+    $id_penjual = $user_data['id_penjual'];
     $nama_makanan = $user_data['nama_makanan'];
     $jenis = $user_data['jenis'];
     $harga = $user_data['harga'];
@@ -43,45 +45,51 @@ while ($user_data = mysqli_fetch_array($menu)) {
 
 <body>
     <!-- boostrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <a href="index.php" class="btn btn-dark mt-4 mx-4">Home</a>
 
 
-    <div class="container">
+    <div class="container border">
+        <div class="card-header text-center bg-primary text-white">Edit Data Menu</div>
         <form name="update_user" method="post" action="edit.php">
-                <div class="mb-3 w-auto">
-                    <label class="form-label">Nama Penjual</label>
-                    <?php
-                    $penjual = mysqli_query($mysqli, "SELECT * FROM penjual ORDER BY id DESC");
+            <div class="mb-3 w-auto">
+                <label class="form-label">Nama Penjual</label>
+                <select name="nama_penjual" id="" class="form-select">
+
+                    <?php 
+                        $penjual = mysqli_query($mysqli, "SELECT * FROM penjual order by id desc");
+
+                        while ($data = mysqli_fetch_array($penjual)) {
+                            $selected  = $id_penjual == $data['id'] ? "selected" : "";
+                            echo '<option value="'.$data['id'].'" '.$selected.'>' .$data['nama_penjual'].' </option>';
+                        };
                     ?>
-                    <select name="nama_penjual" id="" class="form-select">
-                        <?php
-                        while ($row = mysqli_fetch_array($penjual)) {
-                        ?>
-                            <option value="<?= $row['id'] ?>"><?= $row['nama_penjual'] ?></option>
-                        <?php } ?>
-                    </select>
+                </select>
                 </td>
-                </div>
-                <div class="mb-3 w-auto">
-                    <label class="form-label">Nama Makanan</label>
-                    <input type="text" class="form-control" name="nama_makanan" value=<?php echo $nama_makanan; ?>>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Jenis Makanan</label>
-                    <select class="form-select" name="jenis">
-                        <option value="Makanan Berat">Makanan Berat</option>
-                        <option value="Makanan Ringan">Makanan Ringan</option>
-                    </select>
-                </div>
-                <div class="mb-3 w-auto">
-                    <label class="form-label">Harga Makanan</label>
-                    <input type="text" class="form-control" name="harga" value=<?php echo $harga; ?>>
-                </div>
-                <td><input type="hidden" name="id" value=<?php echo $_GET['id']; ?>></td>
-                <td><input type="submit" name="update" value="Update" class="btn btn-primary"></td>
-            </form>
+            </div>
+            <div class=" mb-3 w-auto">
+                <label class="form-label">Nama Makanan</label>
+                <input type="text" class="form-control" name="nama_makanan" value="<?php echo $nama_makanan; ?>">
+            </div>
+            <div class=" mb-3">
+                <label class="form-label">Jenis Makanan</label>
+                <select class="form-select" name="jenis">
+                    <option value="Makanan Berat" <?php if($jenis == "Makanan Berat") echo"selected"; ?>>Makanan Berat
+                    </option>
+                    <option value="Makanan Ringan" <?php if($jenis == "Makanan Ringan") echo"selected"; ?>> Makanan
+                        Ringan
+                    </option>
+                </select>
+            </div>
+            <div class="mb-3 w-auto">
+                <label class="form-label">Harga Makanan</label>
+                <input type="number" class="form-control" name="harga" value=<?php echo $harga; ?>>
+            </div>
+            <td><input type="hidden" name="id" value=<?php echo $_GET['id']; ?>></td>
+            <td><input type="submit" name="update" value="Update" class="btn btn-primary"></td>
+        </form>
     </div>
 
 
